@@ -18,8 +18,6 @@ class UserStatesGroup(StatesGroup):
     city = State()
     hardSkills = State()
 
-class hardSkill(StatesGroup):
-    skill = State()
 
 def getKbStart() -> ReplyKeyboardMarkup:
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
@@ -144,9 +142,9 @@ async def loadHardSkills(message: types.Message, state: FSMContext) -> None:
         if message.text ==  "Далее к заполнению анкеты" and len(hardskills) == 0:
             await message.answer("Вы еще ничего не выбрали!", reply_markup=getKbHardSkillsFirst())
         elif  message.text ==  "Разработка web-приложений":
-            #while message.text != "Назад":
-            await message.answer("Выберите языки которые вы знаете!", reply_markup=getKbHardSkillsWeb())
-            hardskills.append(message.text)
+            while message.text != "Назад":
+                await message.answer("Выберите языки которые вы знаете!", reply_markup=getKbHardSkillsWeb())
+                hardskills.append(message.text)
         elif  message.text ==  "Разработка desktop-приложений":
             while message.text != "Назад":
                 await message.answer("Выберите языки которые вы знаете!", reply_markup=getKbHardSkillsWeb())
